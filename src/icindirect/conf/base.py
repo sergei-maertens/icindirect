@@ -33,25 +33,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Optional applications.
-    'ordered_model',
-    'django_admin_index',
     'django.contrib.admin',
     # 'django.contrib.admindocs',
     # 'django.contrib.humanize',
     # 'django.contrib.sitemaps',
 
-    # django-admin-tools
-    # 'admin_tools',
-    # 'admin_tools.theming',
-    # 'admin_tools.menu',
-    # 'admin_tools.dashboard',
-
     # External applications.
     'axes',
-    'sniplates',
-    'hijack',
-    'compat',  # Part of hijack
-    'hijack_admin',
 
     # Project applications.
     'icindirect.accounts',
@@ -61,7 +49,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    # 'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -91,9 +79,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'icindirect.utils.context_processors.settings',
-                # REQUIRED FOR ADMIN INDEX
-                'django_admin_index.context_processors.dashboard',
             ],
             'loaders': RAW_TEMPLATE_LOADERS
         },
@@ -127,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'nl-nl'
+LANGUAGE_CODE = 'en-US'
 
 TIME_ZONE = 'Europe/Amsterdam'
 
@@ -267,7 +252,6 @@ AUTH_USER_MODEL = 'accounts.User'
 
 # Allow logging in with both username+password and email+password
 AUTHENTICATION_BACKENDS = [
-    'icindirect.accounts.backends.UserModelEmailBackend',
     'django.contrib.auth.backends.ModelBackend'
 ]
 
@@ -278,12 +262,6 @@ PROJECT_NAME = 'icindirect'
 ENVIRONMENT = None
 SHOW_ALERT = True
 
-#
-# Library settings
-#
-
-ADMIN_INDEX_SHOW_REMAINING_APPS = True
-
 # Django-axes
 AXES_LOGIN_FAILURE_LIMIT = 30  # Default: 3
 AXES_LOCK_OUT_AT_FAILURE = True  # Default: True
@@ -292,11 +270,3 @@ AXES_COOLOFF_TIME = 1  # One hour
 AXES_BEHIND_REVERSE_PROXY = True  # Default: False (we are typically using Nginx as reverse proxy)
 AXES_ONLY_USER_FAILURES = False  # Default: False (you might want to block on username rather than IP)
 AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP = False  # Default: False (you might want to block on username and IP)
-
-
-HIJACK_LOGIN_REDIRECT_URL = '/'
-HIJACK_LOGOUT_REDIRECT_URL = reverse_lazy('admin:accounts_user_changelist')
-HIJACK_REGISTER_ADMIN = False
-# This is a CSRF-security risk.
-# See: http://django-hijack.readthedocs.io/en/latest/configuration/#allowing-get-method-for-hijack-views
-HIJACK_ALLOW_GET_REQUESTS = True
