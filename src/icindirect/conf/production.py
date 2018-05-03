@@ -1,50 +1,17 @@
 import raven
 
-from .base import *
+from .base import *  # noqa
 
 #
 # Standard Django settings.
 #
-
-DEBUG = False
-
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'icindirect',
-        'USER': 'icindirect',
-        'PASSWORD': 'icindirect',
-        'HOST': '',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',  # Set to empty string for default.
-    }
-}
-
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = '0ab-#2zhvta7(qa#j@ln_2+%&oclbh*gv$j^7#ji9594h#ucij'
-
-ALLOWED_HOSTS = []
-
-# Redis cache backend
-# NOTE: If you do not use a cache backend, do not use a session backend or
-# cached template loaders that rely on a backend.
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/2", # NOTE: watch out for multiple projects using the same cache!
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            "IGNORE_EXCEPTIONS": True,
-        }
-    }
-}
-
 # Caching sessions.
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-SESSION_CACHE_ALIAS = "default"
+# SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+# SESSION_CACHE_ALIAS = "default"
 
 # Caching templates.
 TEMPLATES[0]['OPTIONS']['loaders'] = [
@@ -87,10 +54,11 @@ SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_HTTPONLY = True
 CSRF_COOKIE_SECURE = True
 X_FRAME_OPTIONS = 'DENY'
+
 # Only set this when we're behind Nginx as configured in our example-deployment
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_CONTENT_TYPE_NOSNIFF = True # Sets X-Content-Type-Options: nosniff
-SECURE_BROWSER_XSS_FILTER = True # Sets X-XSS-Protection: 1; mode=block
+SECURE_CONTENT_TYPE_NOSNIFF = True  # Sets X-Content-Type-Options: nosniff
+SECURE_BROWSER_XSS_FILTER = True  # Sets X-XSS-Protection: 1; mode=block
 
 #
 # Library settings
@@ -101,7 +69,7 @@ INSTALLED_APPS = INSTALLED_APPS + [
     'raven.contrib.django.raven_compat',
 ]
 RAVEN_CONFIG = {
-    'dsn': 'https://',
+    'dsn': os.getenv('RAVEN_DNS'),
     'release': raven.fetch_git_sha(BASE_DIR),
 }
 LOGGING['handlers'].update({

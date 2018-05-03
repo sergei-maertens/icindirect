@@ -8,12 +8,39 @@ BASE_DIR = os.path.abspath(os.path.join(DJANGO_PROJECT_DIR, os.path.pardir, os.p
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '0ab-#2zhvta7(qa#j@ln_2+%&oclbh*gv$j^7#ji9594h#ucij'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME', 'icindirect'),
+        'USER': os.getenv('DB_USER', 'icindirect'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'icindirect'),
+        'HOST': os.getenv('DB_HOST', ''),
+        'PORT': os.getenv('DB_PORT', ''),
+    }
+}
+
+# Redis cache backend
+# NOTE: If you do not use a cache backend, do not use a session backend or
+# cached template loaders that rely on a backend.
+#
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         # NOTE: watch out for multiple projects using the same cache!
+#         "LOCATION": "redis://127.0.0.1:6379/2",
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#             "IGNORE_EXCEPTIONS": True,
+#         }
+#     }
+# }
 
 # Application definition
 
