@@ -11,11 +11,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/maykinmedia/icindirect.git"
+    "url": "git+ssh://git@github.com/sergei-maertens/icindirect.git"
   },
-  "author": "Maykin Media",
-  "license": "UNLICENSED",
-  "homepage": "https://maykinmedia.nl",
+  "author": "Sergei Maertens",
+  "license": "MIT",
+  "homepage": "https://icindirect.nl",
   "dependencies": {
     "bourbon-neat": "^1.8.0",
     "font-awesome": "^4.6.3",
