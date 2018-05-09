@@ -1,0 +1,19 @@
+{% extends "master.html" %}
+{% load i18n %}
+
+
+{% block content %}
+<h1>{% trans "Claim your restitution" %}</h1>
+
+<a href="https://www.ns.nl/formulieren/geld-terug-bij-vertraging.html">
+    {% trans "Official forms" %}
+</a>
+
+<form action="." method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">{% trans "Submit" %}</button>
+</form>
+{% endblock content %}

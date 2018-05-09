@@ -4,7 +4,9 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.views.generic.base import TemplateView
+
+from .claims.views import ClaimView
+
 
 urlpatterns = [
     # url(r'^admin_tools/', include('admin_tools.urls')),
@@ -15,8 +17,8 @@ urlpatterns = [
         auth_views.password_reset_confirm, name='password_reset_confirm'),
     url(r'^reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
 
-    # Simply show the master template.
-    url(r'^$', TemplateView.as_view(template_name='demo.html')),
+    # Main entry point - file a claim
+    url(r'^$', ClaimView.as_view()),
 ]
 
 # NOTE: The staticfiles_urlpatterns also discovers static files (ie. no need to run collectstatic). Both the static

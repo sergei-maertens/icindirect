@@ -67,6 +67,7 @@ INSTALLED_APPS = [
 
     # Project applications.
     'icindirect.accounts',
+    'icindirect.claims',
     'icindirect.utils',
 ]
 

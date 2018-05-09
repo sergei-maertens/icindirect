@@ -34,6 +34,19 @@ In the future, connections with OpenOV data will be leveraged to simplify the
 process even further.
 
 
+Privacy
+=======
+
+This tool relays a lot of personal information that's required by the official
+NS claim forms. This personal information is not stored in the database of
+ICIndirect. A feature exists to save your data for convenience, which is
+implemented as a browser-local feature. This does mean that your data is not
+shared between devices.
+
+I urge everyone to read the source code of this project to verify no funky
+business is happening.
+
+
 Documentation
 =============
 
