@@ -12,6 +12,11 @@ __pycache__
 # Javascript libraries
 /node_modules/
 
+# build result files
+src/icindirect/static/css/**/*.css
+src/icindirect/static/css/**/*.css.map
+src/icindirect/static/js
+
 # Coverage reports
 /reports/
 /htmlcov/

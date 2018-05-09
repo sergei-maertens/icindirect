@@ -10,6 +10,8 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
+from icindirect.setup_env import setup_env
+
 
 def init_newrelic():
     if os.environ.get('PROJECT_ROOT'):
@@ -20,6 +22,8 @@ def init_newrelic():
             print("Could not initialize New Relic APM, ignoring:")
             print(e)
 
+
+setup_env()
 
 # Enable New Relic on production
 # init_newrelic()
